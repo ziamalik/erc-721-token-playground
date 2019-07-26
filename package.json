@@ -22,5 +22,8 @@
   "homepage": "https://github.com/ziamalik/ethereum-star-notary#readme",
   "devDependencies": {
     "truffle": "^5.0.28"
+  },
+  "dependencies": {
+    "openzeppelin-solidity": "^2.3.0"
   }
 }
