@@ -1,10 +1,13 @@
 import Web3 from "web3"; //Importing Web3 object
 import starNotaryArtifact from "../../build/contracts/StarNotary.json"; // Importing the JSON representation of the Smart Contract
+import starNotaryV2Artifact from "../../build/contracts/StarNotaryV2.json";
+
 
 const App = {
   web3: null,
   account: null,
-  meta: null, //This object represent the Smart Contract
+  meta: null, //This object represent the Smart Contract for StarNotary v1
+  meta2: null,  //This object represent the Smart Contract for StarNotary v2
 
   start: async function() {
     const { web3 } = this;
@@ -13,9 +16,14 @@ const App = {
       // get contract instance
       const networkId = await web3.eth.net.getId(); //This method find the network id to retrieve the configuration from truffle-config.js file
       const deployedNetwork = starNotaryArtifact.networks[networkId]; // Retrieve the Network configuration from truffle-config.js file
-      this.meta = new web3.eth.Contract( // Initializing the contract
+      this.meta = new web3.eth.Contract( // Initializing the contract StarNotary v1
         starNotaryArtifact.abi,
         deployedNetwork.address,
+      );
+      const deployedNetwork2 = starNotaryV2Artifact.networks[networkId];
+      this.meta2 = new web3.eth.Contract( // Initializing the contract StarNotary v2
+        starNotaryV2Artifact.abi,
+        deployedNetwork2.address,
       );
 
       // get accounts
@@ -29,6 +37,12 @@ const App = {
   // function to update the status message in the page
   setStatus: function(message) {
     const status = document.getElementById("status");
+    status.innerHTML = message;
+  },
+
+  // function to update the status message in the page for StarNotary v2
+  setStatusV2: function(message) {
+    const status = document.getElementById("statusV2");
     status.innerHTML = message;
   },
 
@@ -54,6 +68,14 @@ const App = {
     await claimStar().send({from: this.account}); // Use `send` instead of `call` when you called a function in your Smart Contract
     const response = await starOwner().call();
     App.setStatus("New Star Owner is " + response + ".");
+  },
+
+  createStar: async function() {
+    const { createStar } = this.meta2.methods;
+    const name = document.getElementById("starName").value;
+    const id = document.getElementById("starId").value;
+    await createStar(name, id).send({from: this.account});
+    App.setStatusV2("New Star Owner is " + this.account + ".");
   }
 
 };

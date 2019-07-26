@@ -14,25 +14,42 @@
 
 <body>
 
-  <h1>StarNotary DAPP</h1>
+  <h1>StarNotary DAPP V1</h1>
 
   <br><label for="name">Star Name:</label>
   <h3 id='name'>Star Name: </h3>
   <br><br><button onclick="App.starNameFunc()">Get Star Name</button>
-  <hr>
+
   <br><label for="owner">Star Owner:</label>
   <h3 id='owner'>Star Owner: </h3>
   <br><br><button onclick="App.starOwnerFunc()">Get Star Owner</button>
   <br><br>
-  <hr>
+
   <br>
-  <h1>Claim Star</h1>
+  <h2>Claim Star</h2>
   <br><br><button id="claimStar" onclick="App.claimStarFunc()">Claim a Star</button>
   <br><br>
   <br>
-  <hr>
+
   <span id="status"></span>
   <br>
+
+  <hr>
+
+  <h1>StarNotary DAPP V2</h1>
+  <br>
+
+  <h2>Create a Star</h2>
+  <br><label for="starName">Star Name:</label><input type="text" id="starName"></input>
+  <br><label for="starId">Star ID:</label><input type="text" id="starId"></input>
+  <br><br><button id="createStar" onclick="App.createStar()">Create Star</button>
+  <br><br>
+  <br>
+
+  <span id="statusV2"></span>
+
+  <br>
+
 
   <script src="index.js"></script>
 </body>
