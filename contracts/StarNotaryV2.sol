@@ -2,7 +2,7 @@ pragma solidity >=0.4.24;
 
 import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 
-contract StarNotary is ERC721 {
+contract StarNotaryV2 is ERC721 {
 
     struct Star {
         string name;
